@@ -33,10 +33,10 @@ function Computer( continuous, outContainer ) {
 	}.bind( this );
 }
 
-Computer.prototype.DEST_LANG = 'en';
+Computer.prototype.DEST_LANG = 'pt';
 
 // True if the speech detector should be listening for commands.
-Computer.prototype.payingAttention = false;
+Computer.prototype.payingAttention = true;
 
 // True if voice just spoke. Good for preventing cycles.
 Computer.prototype.justSpoke = false;
@@ -54,41 +54,35 @@ Computer.prototype.stopListening = function () {
 	}
 	this.isListening = false;
 };
-
 Computer.prototype.translate = function ( txt ) {
-	var translateURL = [
-    'translate.google.com/translate_a/t?client=t&hl=pt&sl=pt&tl=',
-    this.DEST_LANG,
-    '&ie=UTF-8&oe=UTF-8&multires=1&otf=2&ssel=0&tsel=0&sc=1&q=',
-    encodeURIComponent( txt )
-  ].join( '' );
+  // var translateURL = [
+  //   'translate.google.com/translate_a/t?client=t&hl=pt&sl=pt&tl=',
+  //   this.DEST_LANG,
+  //   '&ie=UTF-8&oe=UTF-8&multires=1&otf=2&ssel=0&tsel=0&sc=1&q=',
+  //   encodeURIComponent( txt )
+  // ].join( '' );
 
-	var xhr = new XMLHttpRequest();
-	xhr.open( 'GET', 'http://www.corsproxy.com/' + translateURL, true );
+  // var xhr = new XMLHttpRequest();
+  // xhr.open( 'GET', 'http://www.corsproxy.com/' + translateURL, true );
 
-	xhr.onload = function ( e ) {
-		var arr = eval( e.target.response ); // JSON.parse flakes out on the response.
-		var translateText = arr[ 0 ][ 0 ][ 0 ];
+  // xhr.onload = function ( e ) {
+  //   var arr = eval( e.target.response ); // JSON.parse flakes out on the response.
+  //   var translateText = arr[ 0 ][ 0 ][ 0 ];
 
-		if ( this.outContainer ) {
-			this.outContainer.innerHTML += '<div>' + translateText + '</div>';
-			this.outContainer.scrollTop = this.outContainer.scrollHeight;
-		}
+  //   if ( this.outContainer ) {
+  //     this.outContainer.innerHTML += '<div>' + translateText + '</div>';
+  //     this.outContainer.scrollTop = this.outContainer.scrollHeight;
+  //   }
 
-		this.speak( translateText );
-	}.bind( this );
+    this.speak( txt );
+  }.bind( this );
 
-	xhr.send();
+  xhr.send();
 };
 
 Computer.prototype.speak = function ( txt ) {
 
-	console.log( 'Translated text: ', txt );
-
-	// Need to latinize the text.
-	// Remove when https://code.google.com/p/chromium/issues/detail?id=333515 is fixed.
-	var sanitized = latinize( txt );
-	console.log( 'Sintetizando voz: ' + sanitized );
+	console.log( 'Sintetizando texto: ', txt );
 
 	var msg = new SpeechSynthesisUtterance();
 	msg.voiceURI = 'native';
@@ -97,7 +91,7 @@ Computer.prototype.speak = function ( txt ) {
 	msg.voice = voices[ 10 ];
 	msg.rate = 1; // 0.1 to 10
 	msg.pitch = 1; //0 to 2
-	msg.text = sanitized;
+	msg.text = txt;
 	msg.lang = this.DEST_LANG;
 
 	msg.onend = function ( e ) {

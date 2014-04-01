@@ -149,7 +149,7 @@ computer.onresult = function(e) {
         return;
       }
 
-      console.log('Speech result: ' + result[0].transcript);
+      console.log('Recebendo voz: ' + result[0].transcript);
       this.translate(result[0].transcript);
     }
   }
@@ -188,7 +188,7 @@ stopButton.addEventListener('click', function(e) {
 document.addEventListener('DOMContentLoaded', function(e) {
   computer.DEST_LANG = langSelect.value;
 
-  //computer.speak('test this out');
+  // computer.speak('Situação');
 });
 </script>
 

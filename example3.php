@@ -17,7 +17,7 @@ msg.rate = 1; // 0.1 to 10
 // Tom
 msg.pitch = 1; //0 to 2
 // Texto
-msg.text = 'Boa noite, testando sistema de voz pelo Google Chrome';
+msg.text = 'Boa noite, testando sistema de voz com uma situação ';
 // Idioma
 msg.lang = 'pt-BR';
 
