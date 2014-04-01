@@ -7,7 +7,7 @@
 var msg = new SpeechSynthesisUtterance();
 var voices = window.speechSynthesis.getVoices();
 // Opção de voz
-msg.voice = voices[3]; // Obs: algumas vozes não dão suporte a alterar alguns parâmetros
+msg.voice = voices[10]; // Obs: algumas vozes não dão suporte a alterar alguns parâmetros
 // Tipo de voz
 msg.voiceURI = 'native';
 // Volume

@@ -103,7 +103,7 @@ Copyright 2014 - Eric Bidelman <ebidel@gmail.com>
     <option>de</option>
     <option>en</option>
     <option>es</option>
-    <option selected>pt</option>
+    <option selected>pt-BR</option>
     <option>fr</option>
     <option>it</option>
     <option>nl</option>
